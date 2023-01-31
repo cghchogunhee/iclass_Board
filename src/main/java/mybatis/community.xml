@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="community">
+<!-- Community.java vo클래스 만들기
+1. 메인글 글쓰기 : insert
+2. 글 내용 수정 : update
+3. 글 삭제 : delete
+4. 블 보기 : select
+ -->
+ 	<insert id="insert" parameterType="org.iclass.vo.Community">
+ 	INSERT INTO COMMUNITY
+	VALUES(community_idx_seq.nextval,#{writer},
+	#{title}, #{content}, #{readCount}, sysdate,
+	#{ip}, #{commentCount})
+ 	</insert>
+	<update id="update" parameterType="org.iclass.vo.Community">
+	UPDATE COMMUNITY
+	SET WRITER=#{writer}, TITLE=#{title}, CONTENT=#{content},
+	READCOUNT=#{readCount}, CREATEDAT=sysdate, IP=#{ip},
+	COMMENTCOUNT=#{commentCount}
+	WHERE IDX=#{idx}
+	
+	</update>
+	<delete id="delete" parameterType="int">
+	DELETE FROM COMMUNITY
+	WHERE IDX=#{idx}
+	
+	</delete>
+	<select id="selectAll" resultType="org.iclass.vo.Community">
+	SELECT * FROM community
+	</select>
+	
+</mapper>
