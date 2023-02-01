@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.iclass.vo.Community;
+import org.iclass.vo.CommunityComments;
 
 import mybatis.SqlSessionBean;
 
@@ -26,9 +27,9 @@ public class CommunityDao {
 		mapper.close();
 		return list;
 	}
-	public int insert(Community vo) {
+	public long insert(Community vo) {
 		SqlSession mapper = SqlSessionBean.getSession();
-		int result = mapper.insert("community.insert",vo);
+		long result = mapper.insert("community.insert",vo);
 		mapper.commit();
 		mapper.close();
 		return result;
@@ -83,5 +84,12 @@ public class CommunityDao {
 		mapper.close();
 		return result;
 	}
+	//mref 메인글의 댓글목록 가져오기
+		public List<CommunityComments> comments(int mref){
+			SqlSession mapperSession = SqlSessionBean.getSession();
+			List<CommunityComments> commentList = mapperSession.selectList("community.comments",mref);
+			mapperSession.close();
+			return commentList;
+		}
 	
 }

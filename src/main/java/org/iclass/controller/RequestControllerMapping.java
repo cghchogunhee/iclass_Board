@@ -3,6 +3,7 @@ package org.iclass.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.iclass.controller.community.Controller;
 import org.iclass.controller.community.ListController;
 import org.iclass.controller.community.WriteController;
 import org.iclass.controller.community.WriteViewController;
@@ -15,6 +16,17 @@ public class RequestControllerMapping {
 		mapping.put(new RequestKeyValue("/community/list", "GET"), new ListController() );
 		mapping.put(new RequestKeyValue("/community/write","GET"), new WriteViewController() );
 		mapping.put(new RequestKeyValue("/community/write","POST"), new WriteController() );
+		//회원가입
+		mapping.put(new RequestKeyValue("/member/join","GET"), null);
+		mapping.put(new RequestKeyValue("/member/join","POST"), null);
+		//회원정보수정(update)
+		mapping.put(new RequestKeyValue("/member/modify","GET"), null);
+		mapping.put(new RequestKeyValue("/member/modify","POST"), null);
+		//로그인
+		mapping.put(new RequestKeyValue("/login","GET"), null);
+		mapping.put(new RequestKeyValue("/login","POST"), null);
+		mapping.put(new RequestKeyValue("/logout","GET"), null);
+
 	}
 	//url,method 필드를 저장하는 key 를 전달받아 HashMap에서 value(컨트롤러)를 리턴
 	public static Controller getController(RequestKeyValue key) {

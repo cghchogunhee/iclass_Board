@@ -7,8 +7,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.iclass.controller.Controller;
-
 public class WriteViewController implements Controller {
 
 	@Override
