@@ -18,5 +18,7 @@
 	DELETE FROM COMMUNITYCOMMENTS
 	WHERE IDX=#{idx}
 	</delete>
-	
+	<select id="maxOf" resultType="int">
+		SELECT max(idx)FROM COMMUNITYCOMMENTS
+	</select>
 </mapper>

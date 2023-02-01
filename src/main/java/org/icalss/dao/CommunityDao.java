@@ -14,31 +14,74 @@ public class CommunityDao {
 		return dao;
 	}
 	
+	public Community selectByIdx(int idx) {
+		SqlSession mapper = SqlSessionBean.getSession();
+		Community vo = mapper.selectOne("community.selectByIdx",idx);
+		mapper.close();
+		return vo;
+	}
 	public List<Community>selectAll(){
 		SqlSession mapper = SqlSessionBean.getSession();
-		List<Community>list=mapper.selectList("selectAll");
+		List<Community>list=mapper.selectList("community.selectAll");
 		mapper.close();
 		return list;
 	}
 	public int insert(Community vo) {
 		SqlSession mapper = SqlSessionBean.getSession();
-		int result = mapper.insert("insert",vo);
+		int result = mapper.insert("community.insert",vo);
 		mapper.commit();
 		mapper.close();
 		return result;
 	}
 	public int update(Community vo) {
 		SqlSession mapper = SqlSessionBean.getSession();
-		int result = mapper.update("update",vo);
+		int result = mapper.update("community.update",vo);
 		mapper.commit();
 		mapper.close();
 		return result;
 	}
 	public int delete(int idx) {
 		SqlSession mapper = SqlSessionBean.getSession();
-		int result = mapper.delete("delete",idx);
+		int result = mapper.delete("community.delete",idx);
 		mapper.commit();
 		mapper.close();
 		return result;
 	}
+	public int count() {
+		SqlSession mapper = SqlSessionBean.getSession();
+		int result = mapper.selectOne("community.count");
+		mapper.commit();
+		mapper.close();
+		return result;
+	}
+	public int maxOf(Community vo) {
+		SqlSession mapper = SqlSessionBean.getSession();
+		int result = mapper.selectOne("community.maxOf",vo);
+		mapper.commit();
+		mapper.close();
+		return result;
+	}
+	public int setReadCount(int idx) {
+		SqlSession mapper = SqlSessionBean.getSession();
+		int result = mapper.update("community.setReadCount", idx);
+		mapper.commit();
+		mapper.close();
+		return result;
+	}
+	
+	public int commentsCount(int mref) {
+		SqlSession session = SqlSessionBean.getSession();
+		int result = session.selectOne("community.commentsCount", mref);
+		session.close();
+		return result;
+	}
+	
+	public int setCommentCount(int idx) {
+		SqlSession mapper = SqlSessionBean.getSession();
+		int result = mapper.update("community.setCommentCount", idx);
+		mapper.commit();
+		mapper.close();
+		return result;
+	}
+	
 }

@@ -3,33 +3,76 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="community">
-<!-- Community.java vo클래스 만들기
-1. 메인글 글쓰기 : insert
-2. 글 내용 수정 : update
-3. 글 삭제 : delete
-4. 블 보기 : select
- -->
- 	<insert id="insert" parameterType="org.iclass.vo.Community">
- 	INSERT INTO COMMUNITY
-	VALUES(community_idx_seq.nextval,#{writer},
-	#{title}, #{content}, #{readCount}, sysdate,
-	#{ip}, #{commentCount})
- 	</insert>
+	<!-- Community.java vo클래스 만들기 1. 메인글 글쓰기 : insert 2. 글 내용 수정 : update 3. 
+		글 삭제 : delete 4. 블 보기 : select -->
+	<insert id="insert" parameterType="org.iclass.vo.Community"
+		useGeneratedKeys="false">
+		INSERT INTO community
+		(idx,writer,title,content)
+		VALUES
+		(community_idx_seq.nextval,#{writer},#{title},#{content})
+		<!-- insert 후에 증가된 시퀀스값 (현재값) 가져오기 : idx 필드에 저장하기 -->
+		<selectKey keyProperty="idx" resultType="long" order="AFTER">
+			SELECT
+			community_idx_seq.currval
+			FROM dual
+		</selectKey>
+	</insert>
 	<update id="update" parameterType="org.iclass.vo.Community">
-	UPDATE COMMUNITY
-	SET WRITER=#{writer}, TITLE=#{title}, CONTENT=#{content},
-	READCOUNT=#{readCount}, CREATEDAT=sysdate, IP=#{ip},
-	COMMENTCOUNT=#{commentCount}
-	WHERE IDX=#{idx}
-	
+		UPDATE COMMUNITY
+		SET
+		WRITER=#{writer}, TITLE=#{title}, CONTENT=#{content}
+		WHERE IDX=#{idx}
+
 	</update>
 	<delete id="delete" parameterType="int">
-	DELETE FROM COMMUNITY
-	WHERE IDX=#{idx}
-	
+		DELETE FROM COMMUNITY
+		WHERE
+		IDX=#{idx}
+
 	</delete>
 	<select id="selectAll" resultType="org.iclass.vo.Community">
-	SELECT * FROM community
+		SELECT * FROM community
 	</select>
+	<select id="selectByIdx" parameterType="int" resultType="org.iclass.vo.Community">
+ 		SELECT * 
+ 		FROM 
+ 			community 
+ 		WHERE 
+ 			idx=#{idx}   <!-- PK로 조회 -->
+ 	</select>
+
+	<select id="count" resultType="int">
+		SELECT count(*)FROM COMMUNITY
+	</select>
+
+	<select id="maxOf" resultType="int">
+		SELECT max(idx)FROM COMMUNITY
+	</select>
+
+	<update id="setRendCount" parameterType="int">
+		UPDATE COMMUNITY
+		SET
+		READCOUNT = READCOUNT +1
+		WHERE idx=#{idx}
+	</update>
+	<select id="commentsCount" parameterType="int" resultType="int">
+		SELECT
+		count(*)
+		FROM
+		COMMUNITYCOMMENTS
+		WHERE mref = #{mref}
+	</select>
+	<update id="setCommentCount" parameterType="int">
+		UPDATE COMMUNITY
+		SET COMMENTCOUNT =
+		(SELECT count(*) FROM COMMUNITYCOMMENTS WHERE mref =
+		#{idx})
+		WHERE idx = #{idx}
+	</update>
+	<delete id="commentDelete" parameterType="int">
+		DELETE FROM
+		COMMUNITYCOMMENTS WHERE idx = #{idx}
+	</delete>
 	
 </mapper>

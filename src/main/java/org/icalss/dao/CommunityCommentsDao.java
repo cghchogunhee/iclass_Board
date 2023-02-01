@@ -15,14 +15,21 @@ public class CommunityCommentsDao {
 	
 	public int insert(CommunityComments vo) {
 		SqlSession mapper = SqlSessionBean.getSession();
-		int result = mapper.insert("insert",vo);
+		int result = mapper.insert("communityComments.insert",vo);
 		mapper.commit();
 		mapper.close();
 		return result;
 	}
 	public int delete(int idx) {
 		SqlSession mapper = SqlSessionBean.getSession();
-		int result = mapper.delete("delete",idx);
+		int result = mapper.delete("communityComments.delete",idx);
+		mapper.commit();
+		mapper.close();
+		return result;
+	}
+	public int maxOf(CommunityComments vo) {
+		SqlSession mapper = SqlSessionBean.getSession();
+		int result = mapper.selectOne("communityComments.maxOf",vo);
 		mapper.commit();
 		mapper.close();
 		return result;
