@@ -26,3 +26,4 @@ public class Community {
 	private String ip;
 	private int commentCount;
 }
+	

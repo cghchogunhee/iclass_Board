@@ -18,24 +18,27 @@ public class WriteController implements Controller {
 		String writer = request.getParameter("writer");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
+		String ip = request.getRemoteAddr();
 		CommunityDao dao = CommunityDao.getInstance();
 		long result = dao.insert(Community.builder()
 				.writer(writer)
 				.title(title)
 				.content(content)
+				.ip(ip)
 				.build()
 				);
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.print("<script>");
-		if(result==1){
-		out.print("alert('게시물을 등록했습니다');");
+	//	PrintWriter out = response.getWriter();
+//		out.print("<script>");
+		if(result!=0){
+	//	out.print("alert('게시물을 등록했습니다');");
+		response.sendRedirect("list");
 		}else{
-		out.print("alert('게시물을 등록 실패했습니다');");
+//		out.print("alert('게시물을 등록 실패했습니다');");
+		response.sendRedirect(request.getContextPath());	//메인화면으로 이동
 		}
-		out.print("location.href='list'");
-		out.print("</script>");
+//		out.print("</script>");
 	}
 
 }

@@ -38,7 +38,7 @@
 		 		..<span style="color:orange;font-size: 80%;">(<c:out value="${vo.commentCount }"/>)
 		 		</span></li>
 			<li>
-				<c:out value="${vo.writer }"/>
+				<c:out value="${vo.writer }"/>(<c:out value="${vo.ip }"/>)
 			</li>
 			<li>
 				<c:out value="${vo.readCount }"/>

@@ -31,8 +31,8 @@ public class FrontController extends HttpServlet {
 		String method = request.getMethod();
 		RequestKeyValue key = new RequestKeyValue(url, method);
 		Controller controller = RequestControllerMapping.getController(key);
-		logger.info("::::::::::{}-{}::::::::::",key,controller.getClass());
 		if(controller != null) { 
+			logger.info("::::::::::{}-{}::::::::::",key,controller.getClass());
 			controller.handle(request, response);
 		}	
 		//else 는 error 페이지로 구현 예정.

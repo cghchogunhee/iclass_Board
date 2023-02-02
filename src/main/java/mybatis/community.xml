@@ -8,9 +8,9 @@
 	<insert id="insert" parameterType="org.iclass.vo.Community"
 		useGeneratedKeys="false">
 		INSERT INTO community
-		(idx,writer,title,content)
+		(idx,writer,title,content,ip)
 		VALUES
-		(community_idx_seq.nextval,#{writer},#{title},#{content})
+		(community_idx_seq.nextval,#{writer},#{title},#{content},#{ip})
 		<!-- insert 후에 증가된 시퀀스값 (현재값) 가져오기 : idx 필드에 저장하기 -->
 		<selectKey keyProperty="idx" resultType="long" order="AFTER">
 			SELECT
@@ -21,7 +21,7 @@
 	<update id="update" parameterType="org.iclass.vo.Community">
 		UPDATE COMMUNITY
 		SET
-		WRITER=#{writer}, TITLE=#{title}, CONTENT=#{content}
+		WRITER=#{writer}, TITLE=#{title}, CONTENT=#{content}, #{ip}
 		WHERE IDX=#{idx}
 
 	</update>
