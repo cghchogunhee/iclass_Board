@@ -18,7 +18,16 @@ public class UpdateViewController implements Controller {
 	@Override
 	public void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//수정 화면으로 데이터 보내기
-
+		CommunityDao dao = CommunityDao.getInstance();
+		long idx = 0;
+		Community vo =null;
+		idx = Integer.parseInt(request.getParameter("idx"));
+		vo = dao.selectByIdx(idx);
+		request.setAttribute("vo", vo);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("update.jsp");
+		dispatcher.forward(request, response);
+		
 	}
 
 }

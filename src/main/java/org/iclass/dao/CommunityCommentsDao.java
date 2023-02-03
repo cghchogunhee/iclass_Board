@@ -1,4 +1,4 @@
-package org.icalss.dao;
+package org.iclass.dao;
 
 
 import org.apache.ibatis.session.SqlSession;
@@ -30,6 +30,14 @@ public class CommunityCommentsDao {
 	public int maxOf(CommunityComments vo) {
 		SqlSession mapper = SqlSessionBean.getSession();
 		int result = mapper.selectOne("communityComments.maxOf",vo);
+		mapper.commit();
+		mapper.close();
+		return result;
+	}
+	
+	public int setCommentCount(long idx) {
+		SqlSession mapper = SqlSessionBean.getSession();
+		int result = mapper.update("community.setCommentCount", idx);
 		mapper.commit();
 		mapper.close();
 		return result;

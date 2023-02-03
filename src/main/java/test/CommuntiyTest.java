@@ -2,8 +2,8 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.icalss.dao.CommunityCommentsDao;
-import org.icalss.dao.CommunityDao;
+import org.iclass.dao.CommunityCommentsDao;
+import org.iclass.dao.CommunityDao;
 import org.iclass.vo.Community;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +20,7 @@ class CommuntiyTest {
 	}
 	@Test
 	void update() {
-		int result = communityDao.update(Community.builder().idx(10)
+		long result = communityDao.update(Community.builder().idx(10)
 				.writer("크크크")
 				.title("카카카카")
 				.content("호로록")

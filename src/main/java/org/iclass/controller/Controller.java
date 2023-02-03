@@ -1,4 +1,4 @@
-package org.iclass.controller.community;
+package org.iclass.controller;
 
 import java.io.IOException;
 

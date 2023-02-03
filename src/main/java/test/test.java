@@ -1,6 +1,6 @@
 package test;
 
-import org.icalss.dao.CommunityDao;
+import org.iclass.dao.CommunityDao;
 
 public class test {
 

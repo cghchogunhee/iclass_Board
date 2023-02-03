@@ -1,4 +1,4 @@
-package org.icalss.dao;
+package org.iclass.dao;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class CommunityDao {
 		return dao;
 	}
 	
-	public Community selectByIdx(int idx) {
+	public Community selectByIdx(long idx) {
 		SqlSession mapper = SqlSessionBean.getSession();
 		Community vo = mapper.selectOne("community.selectByIdx",idx);
 		mapper.close();
@@ -41,7 +41,7 @@ public class CommunityDao {
 		mapper.close();
 		return result;
 	}
-	public int delete(int idx) {
+	public int delete(long idx) {
 		SqlSession mapper = SqlSessionBean.getSession();
 		int result = mapper.delete("community.delete",idx);
 		mapper.commit();
@@ -62,7 +62,7 @@ public class CommunityDao {
 		mapper.close();
 		return result;
 	}
-	public int setReadCount(int idx) {
+	public int setReadCount(long idx) {
 		SqlSession mapper = SqlSessionBean.getSession();
 		int result = mapper.update("community.setReadCount", idx);
 		mapper.commit();
@@ -70,22 +70,16 @@ public class CommunityDao {
 		return result;
 	}
 	
-	public int commentsCount(int mref) {
+	public int commentsCount(long mref) {
 		SqlSession session = SqlSessionBean.getSession();
-		int result = session.selectOne("community.commentsCount", mref);
+		int result = session.selectOne("community.commentsCount");
 		session.close();
 		return result;
 	}
 	
-	public int setCommentCount(int idx) {
-		SqlSession mapper = SqlSessionBean.getSession();
-		int result = mapper.update("community.setCommentCount", idx);
-		mapper.commit();
-		mapper.close();
-		return result;
-	}
+	
 	//mref 메인글의 댓글목록 가져오기
-		public List<CommunityComments> comments(int mref){
+		public List<CommunityComments> comments(long mref){
 			SqlSession mapperSession = SqlSessionBean.getSession();
 			List<CommunityComments> commentList = mapperSession.selectList("community.comments",mref);
 			mapperSession.close();

@@ -3,8 +3,12 @@ package org.iclass.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.iclass.controller.community.Controller;
+import org.iclass.controller.community.CommentsController;
+import org.iclass.controller.community.DeleteController;
 import org.iclass.controller.community.ListController;
+import org.iclass.controller.community.ReadController;
+import org.iclass.controller.community.UpdateController;
+import org.iclass.controller.community.UpdateViewController;
 import org.iclass.controller.community.WriteController;
 import org.iclass.controller.community.WriteViewController;
 
@@ -16,6 +20,14 @@ public class RequestControllerMapping {
 		mapping.put(new RequestKeyValue("/community/list", "GET"), new ListController() );
 		mapping.put(new RequestKeyValue("/community/write","GET"), new WriteViewController() );
 		mapping.put(new RequestKeyValue("/community/write","POST"), new WriteController() );
+		//게시판 글 상세보기 ,수정하기,삭제하기
+		mapping.put(new RequestKeyValue("/community/read", "GET"), new ReadController() );
+		mapping.put(new RequestKeyValue("/community/update","GET"), new UpdateViewController() );
+		mapping.put(new RequestKeyValue("/community/update","POST"), new UpdateController() );
+		mapping.put(new RequestKeyValue("/community/delete","GET"), new DeleteController() );
+		//댓글 작성과 수정
+		mapping.put(new RequestKeyValue("/community/comments","POST"), new CommentsController());
+		
 		//회원가입
 		mapping.put(new RequestKeyValue("/member/join","GET"), null);
 		mapping.put(new RequestKeyValue("/member/join","POST"), null);

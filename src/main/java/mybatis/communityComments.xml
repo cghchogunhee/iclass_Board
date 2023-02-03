@@ -9,16 +9,20 @@
 2. 글 삭제 : delete
  -->
  	<insert id="insert" parameterType="org.iclass.vo.CommunityComments">
- 	INSERT INTO COMMUNITY
-	VALUES(#{idx},#{mref},#{writer},
-	#{content}, sysdate,
-	#{ip}, #{commentCount})
- 	</insert>
-	<delete id="delete" parameterType="int">
-	DELETE FROM COMMUNITYCOMMENTS
-	WHERE IDX=#{idx}
-	</delete>
-	<select id="maxOf" resultType="int">
-		SELECT max(idx)FROM COMMUNITYCOMMENTS
-	</select>
+ 		INSERT INTO communityComments
+ 			(idx,mref,writer,content) 
+		VALUES 
+			(comment_idx_seq.nextval,#{mref},#{writer},#{content})
+ 	</insert>  
+ 	
+ 	<delete id="delete" parameterType="int">
+ 		DELETE FROM 
+ 			communityComments 
+ 		WHERE 
+ 			idx=#{idx}
+ 	</delete>
+ 	
+ 	<select id="maxOf" resultType="int">
+ 		SELECT max(idx) FROM communityComments 
+ 	</select>
 </mapper>

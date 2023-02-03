@@ -8,7 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.icalss.dao.CommunityDao;
+import org.iclass.controller.Controller;
+import org.iclass.dao.CommunityDao;
 
 public class ListController implements Controller {
 	@Override

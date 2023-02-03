@@ -7,7 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.icalss.dao.CommunityDao;
+import org.iclass.controller.Controller;
+import org.iclass.dao.CommunityDao;
 import org.iclass.vo.Community;
 
 public class WriteController implements Controller {
