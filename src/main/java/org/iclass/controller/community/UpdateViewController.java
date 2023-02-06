@@ -21,12 +21,16 @@ public class UpdateViewController implements Controller {
 		CommunityDao dao = CommunityDao.getInstance();
 		long idx = 0;
 		Community vo =null;
-		idx = Integer.parseInt(request.getParameter("idx"));
+		idx = Long.parseLong(request.getParameter("idx"));
 		vo = dao.selectByIdx(idx);
 		request.setAttribute("vo", vo);
 		
+		//현제페이지 read.jsp 에서 받아 update.jsp로 전달
+		request.setAttribute("page", request.getParameter("page"));
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("update.jsp");
 		dispatcher.forward(request, response);
+		
 		
 	}
 

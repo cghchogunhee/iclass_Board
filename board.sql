@@ -46,7 +46,7 @@ VALUES (community_idx_seq.nextval, '이사나','정회원 공77지','정회원 �
 INSERT INTO community (idx,writer,title,content)
 VALUES (community_idx_seq.nextval, '이사나','정회원 공88지','정회원 안내입니다.');
 SELECT * FROM community f 
-ORDER BY IDX ASC ;
+ORDER BY IDX DESC  ;
 
 -- 댓글 테이블 데이터
 INSERT INTO communityComments (idx,mref,writer,content)

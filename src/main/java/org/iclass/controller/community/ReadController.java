@@ -23,9 +23,6 @@ public class ReadController implements Controller {
 		long idx=0;
 		try {
 			idx = Long.parseLong(temp);
-		}catch (NumberFormatException e) {
-			response.sendRedirect("list");
-		}
 		
 		CommunityDao dao = CommunityDao.getInstance();
 		dao.setReadCount(idx);
@@ -36,8 +33,14 @@ public class ReadController implements Controller {
 		//idx 메인글의 댓글리스트를 애트리뷰트에 저장하기
 		List<CommunityComments>cmtlist = dao.comments(idx);
 		request.setAttribute("cmtlist", cmtlist);
+		
+		request.setAttribute("page", request.getParameter("page"));
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("read.jsp");
 		dispatcher.forward(request, response);
+		}catch (NumberFormatException e) {
+			response.sendRedirect("list");
+		}
 	}
 
 }

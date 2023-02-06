@@ -6,6 +6,9 @@ import java.util.Map;
 import org.iclass.controller.community.CommentsController;
 import org.iclass.controller.community.DeleteController;
 import org.iclass.controller.community.ListController;
+import org.iclass.controller.community.LoginActionController;
+import org.iclass.controller.community.LoginViewController;
+import org.iclass.controller.community.LogoutController;
 import org.iclass.controller.community.ReadController;
 import org.iclass.controller.community.UpdateController;
 import org.iclass.controller.community.UpdateViewController;
@@ -35,9 +38,9 @@ public class RequestControllerMapping {
 		mapping.put(new RequestKeyValue("/member/modify","GET"), null);
 		mapping.put(new RequestKeyValue("/member/modify","POST"), null);
 		//로그인
-		mapping.put(new RequestKeyValue("/login","GET"), null);
-		mapping.put(new RequestKeyValue("/login","POST"), null);
-		mapping.put(new RequestKeyValue("/logout","GET"), null);
+		mapping.put(new RequestKeyValue("/login","GET"), new LoginViewController());
+		mapping.put(new RequestKeyValue("/login","POST"), new LoginActionController());
+		mapping.put(new RequestKeyValue("/logout","GET"), new LogoutController());
 
 	}
 	//url,method 필드를 저장하는 key 를 전달받아 HashMap에서 value(컨트롤러)를 리턴

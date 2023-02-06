@@ -9,13 +9,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.iclass.controller.Controller;
 
-public class WriteViewController implements Controller {
+public class LoginViewController implements Controller {
 
 	@Override
 	public void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("page", request.getParameter("page"));
-		RequestDispatcher dispatcher = request.getRequestDispatcher("write.jsp");
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 		dispatcher.forward(request, response);
+		
 	}
 
 }

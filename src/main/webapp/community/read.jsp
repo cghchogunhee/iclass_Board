@@ -46,10 +46,12 @@
 			</li>
 		</ul>
 	<div style="text-align: center;margin-bottom: 10px;">
+	<c:if test="${user.id==vo.writer }">	<!-- session에 저장된 user 애트리뷰트의 id와 작성자의 id 가 같으면 보이기-->
 		<a class="button" href="javascript:execute(1)">수정</a>  <!-- 자바스크립트 함수:인자값 1은 수정 -->
 		<!--  예시 : 글 비밀번호 입력하여 삭제. -->
 		<a class="button" href="javascript:execute(2)">삭제</a>  <!-- 자바스크립트 함수:인자값 2는 삭제  -->
-		<a class="button" href="list">목록</a>
+	</c:if>
+		<a class="button" href="list?page=${page }">목록</a>
 	</div>
 	<script type="text/javascript">
 		function execute(f){
@@ -63,7 +65,7 @@
 			const yn = confirm(message)
 			if(yn) {
 				url = (f===1)? 'update?idx='+${vo.idx} :(f===2)? 'delete?idx='+${vo.idx}:'#';
-				location.href=url
+				location.href=url+'&page='+${page};
 			}else{
 				alert('취소합니다.')
 			}	
@@ -76,6 +78,7 @@
 	<form action="comments" method="post">
 	<!-- 필요한 파라미터.화면에는 표시안함. -->
 	<input type="hidden" name="mref" value="${vo.idx }">  <!-- 댓글 추가할 메인글의 idx(댓글테이블 mref.고정값)  -->
+	<input type="hidden" name="page" value="${page }">  
 	<input type="hidden" name="idx" value="0" >	<!-- 삭제할 댓글의 idx(고정값 아님)는 executeCmt 함수에서 설정  -->
 	<input type="hidden" name="f" value="0">
 		<ul>
@@ -93,7 +96,7 @@
 						placeholder="로그인 후에 댓글을 작성하세요." class="input"></textarea>
 					</li>				
 						<li style="align-self: center;margin-bottom: 20px;">
-<!-- 저장버튼 테스트를 위해 변경 --><c:if test="${sessionScope.user == null }">  <!-- 구현 보류 : 로그인 했을때 -->
+<!-- 저장버튼 테스트를 위해 변경 --><c:if test="${sessionScope.user != null }">  <!-- 구현 보류 : 로그인 했을때 -->
 								<button type="button" onclick="executeCmt('1',0)">저장</button>  <!-- 2번째 인자 0은 의미없음. -->
 								<button type="button" onclick="reset_content()">취소</button>
 							</c:if>
@@ -116,7 +119,9 @@
 					<li>${cmt.writer }</li>				
 					<li>${cmt.ip }</li>				
 					<li>${cmt.createdAt }</li>		
-					<li><a href="javascript:executeCmt('2','${cmt.idx }')">삭제</a></li>				
+					<c:if test="${user.id==cmt.writer }">	
+					<li><a href="javascript:executeCmt('2','${cmt.idx }')">삭제</a></li>		
+					</c:if>		
 				</ul>
 			</li>
 			<li>

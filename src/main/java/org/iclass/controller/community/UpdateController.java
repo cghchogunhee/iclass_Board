@@ -39,7 +39,7 @@ public class UpdateController implements Controller {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
 		if(result ==1) {
-			response.sendRedirect("read?idx"+idx);
+			response.sendRedirect("read?idx"+idx+"&page"+request.getParameter("page"));
 		}else {
 			response.sendRedirect(request.getContextPath());
 		}

@@ -31,7 +31,7 @@ private static final Logger logger = LoggerFactory.getLogger(CommentsController.
 									.content(request.getParameter("content"))
 									.ip(request.getRemoteAddr())
 									.build();
-			if(dao.insert(vo)==1) url="read?idx="+mref;
+			if(dao.insert(vo)==1) url="read?idx="+mref+"&page="+request.getParameter("page");
 			else url="list";
 			
 		}else if(f.equals("2")) {	
@@ -39,7 +39,7 @@ private static final Logger logger = LoggerFactory.getLogger(CommentsController.
 			int idx = Integer.parseInt(request.getParameter("idx"));
 			int result = dao.delete(idx);
 			if(result==1) {
-				url="read?idx="+mref;
+				url="read?idx="+mref+"&page="+request.getParameter("page");
 			}else url="list";
 		}
 		//댓글 갯수 변경 dao 메소드는 편의상 CommunityCommentsDao 로 옮기기

@@ -30,6 +30,7 @@ public class WriteController implements Controller {
 				);
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
+		request.setAttribute("page", request.getParameter("page"));
 	//	PrintWriter out = response.getWriter();
 //		out.print("<script>");
 		if(result!=0){

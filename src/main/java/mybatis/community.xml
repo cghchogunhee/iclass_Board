@@ -32,7 +32,7 @@
 
 	</delete>
 	<select id="selectAll" resultType="org.iclass.vo.Community">
-		SELECT * FROM community ORDER BY IDX ASC
+		SELECT * FROM community ORDER BY IDX DESC
 	</select>
 	<select id="selectByIdx" parameterType="long" resultType="org.iclass.vo.Community">
  		SELECT * 
@@ -71,6 +71,14 @@
  	<select id="commentsCount" parameterType="long">
  	select count(*) from communityComments WHERE 
  			mref=#{mref}
+ 	</select>
+ 	 	<!-- 메인글 목록 가져오기 - 할일 : 한번에(즉 한페이지에) 글 10개씩 가져오도록 변경. feature.sql 참고   -->
+
+ 	<select id="pagelist" resultType="org.iclass.vo.Community" parameterType="java.util.Map">
+ 		SELECT * FROM 
+			(SELECT rownum r ,f.* FROM
+								(SELECT * FROM community  ORDER BY idx DESC) f)
+		WHERE r BETWEEN #{start} AND #{end}
  	</select>
  	
 </mapper>
