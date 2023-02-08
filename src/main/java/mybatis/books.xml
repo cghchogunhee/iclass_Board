@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="books">
+	<!-- id속성값은 식별자 : 보통 메소드이름과 동일하게 합니다. 유일한 이름 부여 sql 실행에 필요한 값들에 대해 자바클래스와 
+		테이블의 컬럼을 매핑하여 처리합니다. 1)값 대입할 ? 는 el 기호 #{}로 변경합니다. -> 실행할때 대입되는 기호 2)값 대입할 
+		형식을 parameterType속성에 설정합니다.(패키지명.클래스명 형식) 3)sql실행결과 매핑될 데이터 타입을 resultType으로 
+		설정합니다.(패키지명.클래스명 형식) -->
+	<!-- 파라미터타입이 클래스일때 #{} 는 프로퍼티이름을 정확히 대소문자 구분하여 작성하세요. 여기서의 프로퍼티 이름은 vo 클래스의 
+		변수명입니다. -->
+	<!-- insert, update, delete는 자동으로 return값이 생긴다. -->
+	<insert id="insert" parameterType="org.iclass.vo.NewBooks">
+	INSERT INTO NEWBOOKS
+	VALUES(newbooks_idx_seq.nextval,
+	 #{title}, #{summary},
+	  sysdate, #{coverfile},
+	  #{userid})
+	
+
+	</insert>
+	<select id="selectAll" resultType="org.iclass.vo.NewBooks">
+		SELECT * FROM NEWBOOKS
+	</select>
+	
+</mapper>
+ 
+ 
+ 
+ 
+ 
+ 

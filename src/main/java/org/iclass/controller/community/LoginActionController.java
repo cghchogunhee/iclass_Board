@@ -31,11 +31,13 @@ public class LoginActionController implements Controller {
 		NewMember vo = dao.login(map);
 //		NewMember user = dao.selectOne(id);
 		
-		String url = null;
+		String url = request.getContextPath();
+		String back = (String) session.getAttribute("back");
+		session.removeAttribute("back");
 		if(vo!=null) {
 			//로그인 성공
 			session.setAttribute("user",vo);
-			url = request.getContextPath();
+			if(back!=null)url=back;
 		}else {
 			url = "login?incorrect=y";
 		}

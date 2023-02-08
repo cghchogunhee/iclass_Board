@@ -20,7 +20,7 @@
 			 	</tr>
 			 	<tr>
 					<th><label>작성자</label></th>
-			 		<td><input type="text" name="writer" size="50" required></td>
+			 		<td><input type="text" name="writer" size="50" value="${user.id }"readonly="readonly" required></td>
 			 	</tr>
 			 	<tr><th><label>내용</label></th>  <!-- textarea 의 크기 : rows="30" 는 행 크기, cols="80"은 열  크기 -->
 			 		<td><textarea  rows="30" cols="80" name="content" style="resize:none;"  required></textarea>
@@ -31,7 +31,7 @@
 			 	<td style="text-align: center;padding: 10px;" colspan="2">
 			 	<button type="submit">저장</button>
 			 	<button type="reset">다시쓰기</button>
-			 	<button type="button" onclick="location.href='list?page=${page}'">목록</button>
+			 	<button type="button" onclick="location.href='list?page=${(page eq null)?1:page}'">목록</button>
 			 	</td></tr>
 			 </table>
 			 </form>

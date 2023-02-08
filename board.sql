@@ -60,3 +60,25 @@ VALUES (comment_idx_seq.nextval,9,'김땡땡','이글은 메인글 333번 댓글
 INSERT INTO communityComments (idx,mref,writer,content)
 VALUES (comment_idx_seq.nextval,9,'김땡땡','하이!!!하이~~');
 SELECT *FROM communityComments ;
+
+
+
+
+
+CREATE TABLE MemberVo000 (
+	custname varchar2(30),
+	phone varchar2(30)
+);
+
+SELECT *FROM MEMBERVO000 m ;
+
+
+
+
+
+
+
+
+
+
+
