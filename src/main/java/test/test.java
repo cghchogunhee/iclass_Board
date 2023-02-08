@@ -8,6 +8,7 @@ public class test {
 		CommunityDao dao = CommunityDao.getInstance();
 		System.out.println(dao.count());
 		System.out.println(dao.selectAll());
+		System.out.println(dao.hashCode());
 	}
 
 }
